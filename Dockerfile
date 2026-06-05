@@ -1,24 +1,49 @@
-FROM node:21-alpine3.18 as builder
+# =========================
+# Builder Stage
+# =========================
+FROM node:22-alpine AS builder
+
+ARG NPM_TOKEN
 
 WORKDIR /app
+
 COPY package*.json ./
 COPY tsconfig.json ./
 COPY .npmrc ./
-COPY src ./src
-RUN npm install -g npm@latest
-RUN npm ci && npm run build
 
-FROM node:21-alpine3.18
+# Install all dependencies including dev dependencies
+RUN npm ci
+
+# Copy application source
+COPY . .
+
+# Build application
+RUN npm run build
+
+# =========================
+# Production Stage
+# =========================
+FROM node:22-alpine
+
+ARG NPM_TOKEN
 
 WORKDIR /app
+
 RUN apk add --no-cache curl
+
 COPY package*.json ./
 COPY tsconfig.json ./
 COPY .npmrc ./
-RUN npm install -g pm2 npm@latest
-RUN npm ci --production
+
+# Install PM2
+RUN npm install -g pm2
+
+# Install production dependencies
+RUN npm ci --omit=dev
+
+# Copy build artifacts
 COPY --from=builder /app/build ./build
 
 EXPOSE 4005
 
-CMD [ "npm", "run", "start" ]
+CMD ["npm", "run", "start"]
