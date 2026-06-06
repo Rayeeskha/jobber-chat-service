@@ -227,7 +227,7 @@ PORT=4005
 
 CLIENT_URL=http://localhost:3000
 
-MONGODB_URL=mongodb://localhost:27017/jobber-chat
+MONGODB_URL=mongodb://localhost:27017/jobber-chats
 
 RABBITMQ_ENDPOINT=amqp://localhost
 
@@ -297,7 +297,7 @@ docker login
 ## Build Docker Image
 
 ```bash
-docker build --build-arg NPM_TOKEN=<YOUR_GITHUB_TOKEN> -t rayeeskhandev/jobber-chat .
+docker build --build-arg NPM_TOKEN=<YOUR_GITHUB_TOKEN> -t rayeeskhandev/jobber-chats .
 ```
 
 ---
@@ -305,7 +305,7 @@ docker build --build-arg NPM_TOKEN=<YOUR_GITHUB_TOKEN> -t rayeeskhandev/jobber-c
 ## Tag Docker Image
 
 ```bash
-docker tag rayeeskhandev/jobber-chat rayeeskhandev/jobber-chat:stable
+docker tag rayeeskhandev/jobber-chats rayeeskhandev/jobber-chats:stable
 ```
 
 ---
@@ -313,7 +313,7 @@ docker tag rayeeskhandev/jobber-chat rayeeskhandev/jobber-chat:stable
 ## Push Docker Image
 
 ```bash
-docker push rayeeskhandev/jobber-chat:stable
+docker push rayeeskhandev/jobber-chats:stable
 ```
 
 ---
@@ -323,11 +323,11 @@ docker push rayeeskhandev/jobber-chat:stable
 ```bash
 docker login
 
-docker build --build-arg NPM_TOKEN=<YOUR_GITHUB_TOKEN> -t rayeeskhandev/jobber-chat .
+docker build --build-arg NPM_TOKEN=<YOUR_GITHUB_TOKEN> -t rayeeskhandev/jobber-chats .
 
-docker tag rayeeskhandev/jobber-chat rayeeskhandev/jobber-chat:stable
+docker tag rayeeskhandev/jobber-chats rayeeskhandev/jobber-chats:stable
 
-docker push rayeeskhandev/jobber-chat:stable
+docker push rayeeskhandev/jobber-chats:stable
 ```
 
 ---
